@@ -13,9 +13,11 @@ scripts/
   task-new.sh         create a new task in docs/tasks/backlog/
   task-move.sh        move a task between backlog/in-progress/done
   journal-entry.sh    append a timestamped entry to today's journal file
+  sync-agents-md.sh   create/update the project-management section of the project's root AGENTS.md
 templates/
   task.md             task file template
   handover.md         HANDOVER.md template
+  agents-section.md   the marked block sync-agents-md.sh writes into AGENTS.md
 AGENTS.md              full usage doc, read this first
 ```
 

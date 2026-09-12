@@ -1,8 +1,9 @@
 #!/usr/bin/env bash
 # One-time bootstrap for a project newly consuming this kit: creates
-# docs/tasks/{backlog,in-progress,done}, docs/journal/, and docs/HANDOVER.md
-# (from the template) if they don't already exist. Safe to re-run — never
-# overwrites existing files.
+# docs/tasks/{backlog,in-progress,done}, docs/journal/, docs/HANDOVER.md,
+# and the project-management section of AGENTS.md, if they don't already
+# exist. Safe to re-run — never overwrites existing docs/HANDOVER.md, and
+# the AGENTS.md section is a marked, replaceable block (see sync-agents-md.sh).
 # Usage: init-project.sh
 set -euo pipefail
 
@@ -23,5 +24,8 @@ if [[ ! -f "$HANDOVER" ]]; then
 else
   echo "$HANDOVER already exists — left untouched"
 fi
+
+AGENTS_FILE="$("$SCRIPT_DIR/sync-agents-md.sh")"
+echo "Synced project-management section into $AGENTS_FILE"
 
 echo "Project scaffolding ready under $PROJECT_ROOT/docs/"

@@ -20,7 +20,20 @@ After adding this repo as a submodule (conventionally at `.pm-kit/`), run:
 .pm-kit/scripts/init-project.sh
 ```
 
-This creates `docs/tasks/{backlog,in-progress,done}/`, `docs/journal/`, and `docs/HANDOVER.md` (from the template) in the consuming project if they don't already exist. Safe to re-run.
+This creates `docs/tasks/{backlog,in-progress,done}/`, `docs/journal/`, and `docs/HANDOVER.md` (from the template) in the consuming project if they don't already exist, and also creates or updates the project-management section of the project's root `AGENTS.md` (see below). Safe to re-run.
+
+## The project's root AGENTS.md
+
+`init-project.sh` (and, standalone, `sync-agents-md.sh`) writes a marked, replaceable block into the consuming project's root `AGENTS.md`:
+
+```
+```
+
+If `AGENTS.md` doesn't exist yet, it's created with just this block — the project is free to add its own content above or below it. If it exists, only the content between the markers is replaced; everything else in the file is left alone. This makes it safe to re-run after updating the kit (`sync-agents-md.sh` on its own re-syncs just this section without touching the rest of the file):
+
+```
+.pm-kit/scripts/sync-agents-md.sh
+```
 
 ## Starting a session
 
@@ -64,3 +77,4 @@ Every script auto-detects the *consuming* project's root, not the kit's own — 
 ## Maintaining this kit
 
 Changes to the scripts/templates/this doc happen in this repo, independent of any consuming project. Projects that use this kit as a submodule pick up changes only when they explicitly update the submodule pointer (`cd .pm-kit && git pull && cd .. && git add .pm-kit && git commit`) — so an update here never silently changes behavior in a project that hasn't opted in.
+
