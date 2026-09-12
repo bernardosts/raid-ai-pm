@@ -1,0 +1,1 @@
+This project's instructions for AI agents live in `AGENTS.md`, not here — read it before making changes. This file exists only because some tools look for `CLAUDE.md` specifically; it intentionally carries no separate content so there is only one place to keep in sync.

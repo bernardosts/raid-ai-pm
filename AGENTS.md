@@ -20,19 +20,19 @@ After adding this repo as a submodule (conventionally at `.pm-kit/`), run:
 .pm-kit/scripts/init-project.sh
 ```
 
-This creates `docs/tasks/{backlog,in-progress,done}/`, `docs/journal/`, and `docs/HANDOVER.md` (from the template) in the consuming project if they don't already exist, and also creates or updates the project-management section of the project's root `AGENTS.md` (see below). Safe to re-run.
+This creates `docs/tasks/{backlog,in-progress,done}/`, `docs/journal/`, and `docs/HANDOVER.md` (from the template) in the consuming project if they don't already exist, and also creates or updates the project-management sections of the project's root `AGENTS.md` and `CLAUDE.md` (see below). Safe to re-run.
 
-## The project's root AGENTS.md
+## The project's root AGENTS.md and CLAUDE.md
 
-`init-project.sh` (and, standalone, `sync-agents-md.sh`) writes a marked, replaceable block into the consuming project's root `AGENTS.md`:
+`init-project.sh` (and, standalone, `sync-agents-md.sh` / `sync-claude-md.sh`) each write one marked, replaceable block into one file — `sync-agents-md.sh` into the project's `AGENTS.md` (content from `templates/agents-section.md`), `sync-claude-md.sh` into its `CLAUDE.md` (content from `templates/claude-md-section.md`). Look at those two template files directly for the exact wording; don't reproduce the marker lines verbatim in prose here — the sync scripts match on exact-line markers, so writing them out unescaped in this doc's own body previously caused the sync script to treat this documentation as a real block and mangle it. Lesson learned; take it as a warning, not a suggestion to try it.
 
-```
-```
+`AGENTS.md` is where a project's actual instructions for AI agents live — the kit only owns the one marked section, and the project is free to add its own content above or below it. `CLAUDE.md` gets only a one-line pointer back to `AGENTS.md`: some tools (Claude Code included) look for `CLAUDE.md` specifically, but instructions should only need to be kept in sync in one place, so `CLAUDE.md` never duplicates content — it just redirects.
 
-If `AGENTS.md` doesn't exist yet, it's created with just this block — the project is free to add its own content above or below it. If it exists, only the content between the markers is replaced; everything else in the file is left alone. This makes it safe to re-run after updating the kit (`sync-agents-md.sh` on its own re-syncs just this section without touching the rest of the file):
+If either file doesn't exist yet, it's created with just its block. If it exists, only the content between that file's own markers is replaced; everything else is left alone — safe to re-run standalone after a kit update:
 
 ```
 .pm-kit/scripts/sync-agents-md.sh
+.pm-kit/scripts/sync-claude-md.sh
 ```
 
 ## Starting a session

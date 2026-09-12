@@ -1,9 +1,10 @@
 #!/usr/bin/env bash
 # One-time bootstrap for a project newly consuming this kit: creates
 # docs/tasks/{backlog,in-progress,done}, docs/journal/, docs/HANDOVER.md,
-# and the project-management section of AGENTS.md, if they don't already
-# exist. Safe to re-run — never overwrites existing docs/HANDOVER.md, and
-# the AGENTS.md section is a marked, replaceable block (see sync-agents-md.sh).
+# and the project-management sections of AGENTS.md and CLAUDE.md, if they
+# don't already exist. Safe to re-run — never overwrites existing
+# docs/HANDOVER.md, and the AGENTS.md/CLAUDE.md sections are marked,
+# replaceable blocks (see sync-agents-md.sh / sync-claude-md.sh).
 # Usage: init-project.sh
 set -euo pipefail
 
@@ -27,5 +28,8 @@ fi
 
 AGENTS_FILE="$("$SCRIPT_DIR/sync-agents-md.sh")"
 echo "Synced project-management section into $AGENTS_FILE"
+
+CLAUDE_FILE="$("$SCRIPT_DIR/sync-claude-md.sh")"
+echo "Synced pointer section into $CLAUDE_FILE"
 
 echo "Project scaffolding ready under $PROJECT_ROOT/docs/"
