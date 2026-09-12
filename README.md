@@ -26,7 +26,7 @@ AGENTS.md              full usage doc, read this first
 ## Using this in a project
 
 ```
-git submodule add <this-repo-url> .pm-kit
+git submodule add https://github.com/bernardosts/raid-ai-pm.git .pm-kit
 .pm-kit/scripts/init-project.sh
 ```
 
